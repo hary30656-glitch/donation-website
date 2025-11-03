@@ -1,0 +1,185 @@
+html{
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #1a1a2e;
+  color: #fefefe;
+  line-height: 1.6;
+}
+
+header {
+  background: #0f0f1f;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #ff6b00;
+  margin-bottom: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav a {
+  color: #fefefe;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+    #mainContainer {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    #mainContainer h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    #mainContainer p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .hospital-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+    }
+
+    .hospital-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      max-width: 350px;
+    }
+
+    .hospital-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .hospital-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .hospital-card h3 {
+      margin: 1rem 0 0.5rem;
+    }
+
+    .hospital-card p {
+      padding: 0 1rem 1rem;
+      color: #666;
+    }
+
+    .hospital-card button {
+      background: #ff6b6b;
+      border: none;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* Popup Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .popup {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup h2 {
+      color: #ff6b6b;
+    }
+
+    .popup button {
+      background: #ff6b6b;
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .close-btn {
+      background: #ccc;
+      color: #333;
+      margin-left: 0.5rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    /* Patient List */
+    .patient-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      color: black;
+    }
+
+    .patient-item {
+      padding: 0.6rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .patient-item:hover {
+      background: #ffeaea;
+    }

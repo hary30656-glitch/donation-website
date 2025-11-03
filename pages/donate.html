@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate Now | Kindred Flame</title>
+  <link rel="stylesheet" href="donation.css" />
+</head>
+<body>
+  <header>
+    <h1>Kindred Flame</h1>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#causes">Causes</a></li>
+        <li><a href="#donate">Donate</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#join">Join</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="mainContainer">
+    <h2>Make a Difference Today</h2>
+    <p>Your generosity fuels our mission to ignite hope and transform lives. Choose a hospital below and support their cause.</p>
+
+    <div class="hospital-grid">
+      <div class="hospital-card">
+        <img src="/images/Bir_Hospital_situated_in_Kathmandu.jpg" alt="Hope Medical Center">
+        <h3>Hope Medical Center</h3>
+        <p>Affordable healthcare for underprivileged families and rural communities.</p>
+        <button class="donate-btn" data-hospital="Hope Medical Center">Donate Now</button>
+      </div>
+
+      <div class="hospital-card">
+        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3" alt="Sunrise Children's Hospital">
+        <h3>Sunrise Children's Hospital</h3>
+        <p>Supporting critical care for infants and children in need of life-saving treatments.</p>
+        <button class="donate-btn" data-hospital="Sunrise Children's Hospital">Donate Now</button>
+      </div>
+
+      <div class="hospital-card">
+        <img src="/images/2020-08-07.webp" alt="Saint Mercy Hospital">
+        <h3>Saint Mercy Hospital</h3>
+        <p>Focused on emergency medical services and treatment for disaster-affected individuals.</p>
+        <button class="donate-btn" data-hospital="Saint Mercy Hospital">Donate Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup" id="popupContainer">
+      <!-- Step 1: Patient List -->
+      <div id="patientListView">
+        <h2 id="popupHospitalName">Select a Patient</h2>
+        <div class="patient-list" id="patientList"></div>
+        <button class="close-btn" id="closePopup1">Cancel</button>
+      </div>
+
+      <!-- Step 2: Donation Form -->
+      <div id="donationFormView" style="display:none;">
+        <h2 id="donationTitle">Donate Now</h2>
+        <form>
+          <input type="text" id="donationPatientName" placeholder="Patient Name" readonly />
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email Address" required />
+          <input type="number" placeholder="Contact Number" required />
+          <input type="text" placeholder="Citizenship Number" required />
+
+          <select required>
+            <option value="" disabled selected>Select Donation Type</option>
+            <option value="medical">Medical Aid</option>
+            <option value="equipment">Hospital Equipment</option>
+            <option value="patient-support">Patient Support</option>
+            <option value="general-fund">General Fund</option>
+          </select>
+
+          <select required>
+            <option value="" disabled selected>Select Donation Amount</option>
+            <option value="500">Rs.500 – Spark of Hope</option>
+            <option value="1000">Rs.1000 – Beacon of Change</option>
+            <option value="5000">Rs.5000 – Wildfire of Kindness</option>
+          </select>
+
+          <button type="submit">Proceed to Pay</button>
+          <button type="button" class="close-btn" id="closePopup2">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hospitals = {
+      "Hope Medical Center": ["Rina Sharma", "Kamal Das", "Amit Rai"],
+      "Sunrise Children's Hospital": ["Baby Aarav", "Maya Thapa", "Sushil Karki", "Anita Shrestha"],
+      "Saint Mercy Hospital": ["Ramesh Adhikari", "Lalita Gurung", "Binod KC"]
+    };
+
+    const donateButtons = document.querySelectorAll(".donate-btn");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const patientListView = document.getElementById("patientListView");
+    const donationFormView = document.getElementById("donationFormView");
+    const patientList = document.getElementById("patientList");
+    const donationPatientName = document.getElementById("donationPatientName");
+    const donationTitle = document.getElementById("donationTitle");
+    const popupHospitalName = document.getElementById("popupHospitalName");
+
+    // Open Patient List
+    donateButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const hospital = btn.getAttribute("data-hospital");
+        popupHospitalName.textContent = `Select a Patient at ${hospital}`;
+        patientList.innerHTML = "";
+
+        hospitals[hospital].forEach(name => {
+          const div = document.createElement("div");
+          div.className = "patient-item";
+          div.textContent = name;
+          div.addEventListener("click", () => {
+            donationPatientName.value = name;
+            donationTitle.textContent = `Donate to ${name}`;
+            patientListView.style.display = "none";
+            donationFormView.style.display = "block";
+          });
+          patientList.appendChild(div);
+        });
+
+        popupOverlay.style.display = "flex";
+        patientListView.style.display = "block";
+        donationFormView.style.display = "none";
+      });
+    });
+
+    // Close buttons
+    document.getElementById("closePopup1").addEventListener("click", () => popupOverlay.style.display = "none");
+    document.getElementById("closePopup2").addEventListener("click", () => popupOverlay.style.display = "none");
+
+    popupOverlay.addEventListener("click", (e) => {
+      if (e.target === popupOverlay) popupOverlay.style.display = "none";
+    });
+  </script>
+</body>
+</html>

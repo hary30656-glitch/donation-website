@@ -1,0 +1,101 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fffaf5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background-color: #ff6b3d;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Main Container */
+.about-container {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+/* Intro Section */
+.intro h2 {
+  font-size: 2rem;
+  color: #ff6b3d;
+  margin-bottom: 1rem;
+}
+
+.intro p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Values Section */
+.values-section h2 {
+  font-size: 2rem;
+  color: #ff6b3d;
+  margin-bottom: 1rem;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.value-card {
+  background-color: #ffe0d3;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.value-card h3 {
+  color: #ff6b3d;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+  background-color: #ff6b3d;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .intro h2,
+  .values-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate Now | Kindred Flame</title>
+  <link rel="stylesheet" href="/pages/donation.css" />
+    <link rel="stylesheet" href="/pages/patient-details.css" />
+</head>
+<body>
+  <header>
+    <h1>Kindred Flame</h1>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#causes">Causes</a></li>
+        <li><a href="#donate">Donate</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#join">Join</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="mainContainer">
+    <h2>Make a Difference Today</h2>
+    <p>Your generosity fuels our mission to ignite hope and transform lives. Choose a hospital below and support their cause.</p>
+
+    <div class="hospital-grid">
+      <div class="hospital-card">
+        <img src="/images/Bir_Hospital_situated_in_Kathmandu.jpg" alt="Hope Medical Center">
+        <h3>Hope Medical Center</h3>
+        <p>Affordable healthcare for underprivileged families and rural communities.</p>
+        <button class="donate-btn" data-hospital="Hope Medical Center">Donate Now</button>
+      </div>
+
+      <div class="hospital-card">
+        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3" alt="Sunrise Children's Hospital">
+        <h3>Sunrise Children's Hospital</h3>
+        <p>Supporting critical care for infants and children in need of life-saving treatments.</p>
+        <button class="donate-btn" data-hospital="Sunrise Children's Hospital">Donate Now</button>
+      </div>
+
+      <div class="hospital-card">
+        <img src="/images/2020-08-07.webp" alt="Saint Mercy Hospital">
+        <h3>Saint Mercy Hospital</h3>
+        <p>Focused on emergency medical services and treatment for disaster-affected individuals.</p>
+        <button class="donate-btn" data-hospital="Saint Mercy Hospital">Donate Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup" id="popupContainer">
+      <!-- Step 1: Patient List -->
+      <div id="patientListView">
+        <h2 id="popupHospitalName">Select a Patient</h2>
+        <div class="patient-list" id="patientList"></div>
+        <button class="close-btn" id="closePopup1">Cancel</button>
+      </div>
+
+      <!-- Step 2: Patient Details -->
+      <div id="patientDetailsView" style="display:none;">
+        <h2>Patient Details</h2>
+        <div class="patient-details-content" id="patientDetailsContent"></div>
+        <div class="details-buttons">
+          <button class="donate-btn-small" id="proceedToDonate">Proceed to Donate</button>
+          <button class="close-btn" id="backToList">Back to List</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Donation Form -->
+      <div id="donationFormView" style="display:none;">
+        <h2 id="donationTitle">Donate Now</h2>
+        <form id="donationForm">
+          <input type="text" id="donationPatientName" placeholder="Patient Name" readonly />
+          <input type="text" id="donorName" placeholder="Full Name" required />
+          <input type="email" id="donorEmail" placeholder="Email Address" required />
+          <input type="number" id="donorContact" placeholder="Contact Number" required />
+          <input type="text" id="donorCitizenship" placeholder="Citizenship Number" required />
+
+          <select id="donationType" required>
+            <option value="" disabled selected>Select Donation Type</option>
+            <option value="medical">Medical Aid</option>
+            <option value="equipment">Hospital Equipment</option>
+            <option value="patient-support">Patient Support</option>
+            <option value="general-fund">General Fund</option>
+          </select>
+
+          <select id="donationAmount" required>
+            <option value="" disabled selected>Select Donation Amount</option>
+            <option value="500">Rs.500 – Spark of Hope</option>
+            <option value="1000">Rs.1000 – Beacon of Change</option>
+            <option value="5000">Rs.5000 – Wildfire of Kindness</option>
+          </select>
+
+          <button type="submit">Proceed to Pay</button>
+          <button type="button" class="close-btn" id="closePopup2">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const patientData = {
+      "Hope Medical Center": {
+        "Rina Sharma": {
+          age: 42,
+          condition: "Chronic Kidney Disease",
+          treatment: "Dialysis treatment required 3 times per week",
+          urgency: "High",
+          estimatedCost: "Rs. 250,000",
+          story: "Single mother of two, unable to afford ongoing treatment costs."
+        },
+        "Kamal Das": {
+          age: 58,
+          condition: "Heart Disease",
+          treatment: "Cardiac surgery and post-operative care",
+          urgency: "Critical",
+          estimatedCost: "Rs. 500,000",
+          story: "Retired teacher needing urgent heart surgery to survive."
+        },
+        "Amit Rai": {
+          age: 35,
+          condition: "Spinal Injury",
+          treatment: "Surgical intervention and rehabilitation",
+          urgency: "Medium",
+          estimatedCost: "Rs. 350,000",
+          story: "Construction worker injured on job, family struggling to cover costs."
+        },
+        "Hari Bahadur": {
+          age: 67,
+          condition: "Diabetes Complications",
+          treatment: "Wound care and medication management",
+          urgency: "Medium",
+          estimatedCost: "Rs. 150,000",
+          story: "Elderly farmer needing continuous care for diabetic foot complications."
+        }
+      },
+      "Sunrise Children's Hospital": {
+        "Baby Aarav": {
+          age: "6 months",
+          condition: "Congenital Heart Defect",
+          treatment: "Open heart surgery required",
+          urgency: "Critical",
+          estimatedCost: "Rs. 600,000",
+          story: "Premature baby needing life-saving heart surgery."
+        },
+        "Maya Thapa": {
+          age: 8,
+          condition: "Leukemia",
+          treatment: "Chemotherapy and bone marrow transplant",
+          urgency: "High",
+          estimatedCost: "Rs. 800,000",
+          story: "Bright student fighting cancer, family unable to afford full treatment."
+        },
+        "Sushil Karki": {
+          age: 12,
+          condition: "Severe Burns",
+          treatment: "Skin grafting and rehabilitation",
+          urgency: "High",
+          estimatedCost: "Rs. 400,000",
+          story: "Accident victim requiring multiple surgeries and long-term care."
+        },
+        "Anita Shrestha": {
+          age: 5,
+          condition: "Brain Tumor",
+          treatment: "Neurosurgery and radiation therapy",
+          urgency: "Critical",
+          estimatedCost: "Rs. 700,000",
+          story: "Young child diagnosed with operable brain tumor, needs immediate surgery."
+        }
+      },
+      "Saint Mercy Hospital": {
+        "Ramesh Adhikari": {
+          age: 45,
+          condition: "Road Accident Trauma",
+          treatment: "Multiple surgeries and intensive care",
+          urgency: "Critical",
+          estimatedCost: "Rs. 450,000",
+          story: "Sole breadwinner of family, recovering from severe road accident injuries."
+        },
+        "Lalita Gurung": {
+          age: 52,
+          condition: "Earthquake Injuries",
+          treatment: "Orthopedic surgery and physical therapy",
+          urgency: "High",
+          estimatedCost: "Rs. 300,000",
+          story: "Displaced by natural disaster, suffering from multiple fractures."
+        },
+        "Binod KC": {
+          age: 38,
+          condition: "Severe Infection",
+          treatment: "Antibiotic therapy and supportive care",
+          urgency: "High",
+          estimatedCost: "Rs. 200,000",
+          story: "Farmer with life-threatening infection, limited access to healthcare."
+        }
+      }
+    };
+
+    const donateButtons = document.querySelectorAll(".donate-btn");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const patientListView = document.getElementById("patientListView");
+    const patientDetailsView = document.getElementById("patientDetailsView");
+    const donationFormView = document.getElementById("donationFormView");
+    const patientList = document.getElementById("patientList");
+    const patientDetailsContent = document.getElementById("patientDetailsContent");
+    const donationPatientName = document.getElementById("donationPatientName");
+    const donationTitle = document.getElementById("donationTitle");
+    const popupHospitalName = document.getElementById("popupHospitalName");
+
+    let currentHospital = "";
+    let currentPatient = "";
+
+    // Open Patient List
+    donateButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentHospital = btn.getAttribute("data-hospital");
+        popupHospitalName.textContent = `Select a Patient at ${currentHospital}`;
+        patientList.innerHTML = "";
+
+        Object.keys(patientData[currentHospital]).forEach(name => {
+          const div = document.createElement("div");
+          div.className = "patient-item";
+          div.innerHTML = `
+            <div class="patient-item-content">
+              <strong>${name}</strong>
+              <button class="see-details-btn" data-patient="${name}">See Details</button>
+            </div>
+          `;
+          patientList.appendChild(div);
+        });
+
+        // Add event listeners to "See Details" buttons
+        document.querySelectorAll(".see-details-btn").forEach(detailBtn => {
+          detailBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const patientName = detailBtn.getAttribute("data-patient");
+            showPatientDetails(patientName);
+          });
+        });
+
+        popupOverlay.style.display = "flex";
+        patientListView.style.display = "block";
+        patientDetailsView.style.display = "none";
+        donationFormView.style.display = "none";
+      });
+    });
+
+    // Show Patient Details
+    function showPatientDetails(patientName) {
+      currentPatient = patientName;
+      const details = patientData[currentHospital][patientName];
+      
+      patientDetailsContent.innerHTML = `
+        <div class="detail-item">
+          <span class="detail-label">Patient Name:</span>
+          <span class="detail-value">${patientName}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Age:</span>
+          <span class="detail-value">${details.age}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Condition:</span>
+          <span class="detail-value">${details.condition}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Treatment Needed:</span>
+          <span class="detail-value">${details.treatment}</span>
+        </div>
+        <div class="detail-item urgency-${details.urgency.toLowerCase()}">
+          <span class="detail-label">Urgency:</span>
+          <span class="detail-value">${details.urgency}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Estimated Cost:</span>
+          <span class="detail-value">${details.estimatedCost}</span>
+        </div>
+        <div class="patient-story">
+          <span class="detail-label">Story:</span>
+          <p>${details.story}</p>
+        </div>
+      `;
+
+      patientListView.style.display = "none";
+      patientDetailsView.style.display = "block";
+      donationFormView.style.display = "none";
+    }
+
+    // Proceed to Donate from Details
+    document.getElementById("proceedToDonate").addEventListener("click", () => {
+      donationPatientName.value = currentPatient;
+      donationTitle.textContent = `Donate to ${currentPatient}`;
+      patientDetailsView.style.display = "none";
+      donationFormView.style.display = "block";
+    });
+
+    // Back to List
+    document.getElementById("backToList").addEventListener("click", () => {
+      patientDetailsView.style.display = "none";
+      patientListView.style.display = "block";
+    });
+
+    // Close buttons
+    document.getElementById("closePopup1").addEventListener("click", () => popupOverlay.style.display = "none");
+    document.getElementById("closePopup2").addEventListener("click", () => popupOverlay.style.display = "none");
+
+    popupOverlay.addEventListener("click", (e) => {
+      if (e.target === popupOverlay) popupOverlay.style.display = "none";
+    });
+
+    // Form submission
+    document.getElementById("donationForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Thank you for your donation! Redirecting to payment gateway...");
+      popupOverlay.style.display = "none";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

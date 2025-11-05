@@ -1,176 +1,4 @@
-html{
-  scroll-behavior: smooth;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #1a1a2e;
-  color: #fefefe;
-  line-height: 1.6;
-}
-
-header {
-  background: #0f0f1f;
-  padding: 20px;
-  text-align: center;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  color: #ff6b00;
-  margin-bottom: 10px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-nav a {
-  color: #fefefe;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-    #mainContainer {
-      text-align: center;
-      padding: 3rem 1rem;
-    }
-
-    #mainContainer h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-
-    #mainContainer p {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 700px;
-      margin: 0 auto 3rem;
-    }
-
-    .hospital-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      justify-items: center;
-    }
-
-    .hospital-card {
-      background: #fff;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-      max-width: 350px;
-    }
-
-    .hospital-card:hover {
-      transform: translateY(-8px);
-    }
-
-    .hospital-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .hospital-card h3 {
-      margin: 1rem 0 0.5rem;
-    }
-
-    .hospital-card p {
-      padding: 0 1rem 1rem;
-      color: #666;
-    }
-
-    .hospital-card button {
-      background: #ff6b6b;
-      border: none;
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      margin-bottom: 1.2rem;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    /* Popup Overlay */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-
-    .popup {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      animation: fadeIn 0.3s ease;
-      
-    }
-
-    @keyframes fadeIn {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .popup h2 {
-      color: #ff6b6b;
-    }
-
-    .popup button {
-      background: #ff6b6b;
-      color: #fff;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    .close-btn {
-      background: #ccc;
-      color: #333;
-      margin-left: 0.5rem;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 0.7rem;
-      margin: 0.5rem 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    /* Patient List */
-    .patient-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      color: black;/* Smooth scrolling */
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
@@ -482,7 +310,6 @@ nav ul li a:hover {
   background: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
   padding: 1.2rem 1.5rem;
   border-radius: 15px;
-  cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 600;
   color: #2d2d2d;
@@ -491,11 +318,165 @@ nav ul li a:hover {
 }
 
 .patient-item:hover {
-  background: linear-gradient(135deg, #ffb347 0%, #ff8c5a 100%);
-  color: white;
   transform: translateX(8px);
   border-left-color: #ff6b3d;
   box-shadow: 0 4px 20px rgba(255, 107, 61, 0.3);
+}
+
+.patient-item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-item-content strong {
+  flex: 1;
+}
+
+.see-details-btn {
+  background: linear-gradient(135deg, #ff6b3d 0%, #ffb347 100%);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(255, 107, 61, 0.2);
+}
+
+.see-details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 61, 0.4);
+}
+
+/* Patient Details View */
+.patient-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  background: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  border-left: 4px solid #ff6b3d;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: #ff6b3d;
+  min-width: 140px;
+}
+
+.detail-value {
+  flex: 1;
+  text-align: right;
+  color: #2d2d2d;
+  font-weight: 600;
+}
+
+.urgency-critical {
+  border-left-color: #dc2626;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+}
+
+.urgency-critical .detail-label,
+.urgency-critical .detail-value {
+  color: #dc2626;
+}
+
+.urgency-high {
+  border-left-color: #ea580c;
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+}
+
+.urgency-high .detail-label,
+.urgency-high .detail-value {
+  color: #ea580c;
+}
+
+.urgency-medium {
+  border-left-color: #eab308;
+  background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+}
+
+.urgency-medium .detail-label,
+.urgency-medium .detail-value {
+  color: #ca8a04;
+}
+
+.patient-story {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 2px solid #ffe8d6;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.patient-story .detail-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.patient-story p {
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 400;
+}
+
+.details-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.donate-btn-small {
+  padding: 1.2rem;
+  background: linear-gradient(135deg, #ff6b3d 0%, #ffb347 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(255, 107, 61, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.donate-btn-small::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.donate-btn-small:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+.donate-btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 61, 0.4);
 }
 
 /* Donation Form */
@@ -665,16 +646,3 @@ nav ul li a:hover {
     padding: 1.5rem;
   }
 }
-    }
-
-    .patient-item {
-      padding: 0.6rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .patient-item:hover {
-      background: #ffeaea;
-    }

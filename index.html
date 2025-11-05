@@ -4,103 +4,194 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kindred Flame – Ignite Hope</title>
-  <link rel="stylesheet" href="/style/style.css" />
-  <link rel="stylesheet" href="/pages/patient-details.html"> 
-  <link rel="stylesheet" href="/pages/patient-details.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Kindred Flame</h1>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#causes">Causes</a></li>
-        <li><a href="#donate">Donate</a></li>
-        <li><a href="#impact">Impact</a></li>
-        <li><a href="#join">Join</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <h1 class="logo">🔥 Kindred Flame</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#causes">Causes</a></li>
+          <li><a href="#donate">Donate</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#join">Join</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <section id="home" class="hero">
-    <h2>One spark can light a thousand hearts.</h2>
-    <p>Be the flame.</p>
-    <a href="/pages/patient-details.html" class="btn">Donate Now</a>
-    <a href="#join" class="btn secondary">Join the Crew</a>
+    <div class="hero-content">
+      <div class="flame-icon">🔥</div>
+      <h2 class="hero-title">One spark can light a thousand hearts.</h2>
+      <p class="hero-subtitle">Be the flame.</p>
+      <div class="hero-buttons">
+        <a href="/pages/patient-details.html" class="btn btn-primary">Donate Now</a>
+        <a href="#join" class="btn btn-secondary">Join the Crew</a>
+      </div>
+    </div>
+    <div class="hero-bg-animation"></div>
   </section>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>We uplift communities through generosity and action, where kindness sparks hope in every soul..</p> 
-    <a href="/pages/about -us .html" class="btn">Learn More</a>
-
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>About Us</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="about-text">We uplift communities through generosity and action, where kindness sparks hope in every soul.</p> 
+      <a href="/pages/about-us.html" class="btn btn-outline">Learn More</a>
+    </div>
   </section>
 
-  <section id="causes">
-    <h2>Our Causes</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Child Education</h3>
-        <p>Fuel futures with books and dreams.</p>
+  <section id="causes" class="causes-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Causes</h2>
+        <div class="section-divider"></div>
       </div>
-      <div class="card">
-        <h3>Clean Water Access</h3>
-        <p>Every drop counts.</p>
-      </div>
-      <div class="card">
-        <h3>Food Security</h3>
-        <p>No plate left empty.</p>
-      </div>
-      <div class="card">
-        <h3>Emergency Relief</h3>
-        <p>Be the first responder from afar.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Child Education</h3>
+          <p>Fuel futures with books and dreams.</p>
+          <div class="card-glow"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💧</div>
+          <h3>Clean Water Access</h3>
+          <p>Every drop counts.</p>
+          <div class="card-glow"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍽️</div>
+          <h3>Food Security</h3>
+          <p>No plate left empty.</p>
+          <div class="card-glow"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <h3>Emergency Relief</h3>
+          <p>Be the first responder from afar.</p>
+          <div class="card-glow"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="donate">
-    <h2>Donate</h2>
-    <p>Select your donation tier:</p>
-    <ul class="donation-tiers">
-      <li>Rs.500 – Spark of Hope</li>
-      <li>Rs.1000 – Beacon of Change</li>
-      <li>Rs.5000 – Wildfire of Kindness</li>
-    </ul>
-    <a href="/pages/donate.html"><button class="btn" >Donate Now</button></a>
+  <section id="donate" class="donate-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Donate</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="donate-intro">Select your donation tier:</p>
+      <div class="donation-tiers">
+        <div class="tier">
+          <div class="tier-icon">✨</div>
+          <h4>Spark of Hope</h4>
+          <p class="tier-amount">Rs.500</p>
+        </div>
+        <div class="tier featured">
+          <div class="tier-badge">Popular</div>
+          <div class="tier-icon">🔆</div>
+          <h4>Beacon of Change</h4>
+          <p class="tier-amount">Rs.1000</p>
+        </div>
+        <div class="tier">
+          <div class="tier-icon">🔥</div>
+          <h4>Wildfire of Kindness</h4>
+          <p class="tier-amount">Rs.5000</p>
+        </div>
+      </div>
+      <a href="/pages/donate.html"><button class="btn btn-primary btn-large">Donate Now</button></a>
+    </div>
   </section>
 
-  <section id="impact">
-    <h2>Impact Stories</h2>
-    <p>See how your kindness transforms lives:</p>
-    <ul>
-      <li>“From Dust to Dreams” – A girl in Dang now goes to school</li>
-      <li>“Water for Life” – A village in Karnali now has clean water</li>
-      <li>“The Night We Rebuilt” – Earthquake relief in Gorkha</li>
-    </ul>
+  <section id="impact" class="impact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Impact Stories</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="impact-intro">See how your kindness transforms lives:</p>
+      <div class="impact-stories">
+        <div class="story">
+          <div class="story-number">01</div>
+          <h4>"From Dust to Dreams"</h4>
+          <p>A girl in Dang now goes to school</p>
+        </div>
+        <div class="story">
+          <div class="story-number">02</div>
+          <h4>"Water for Life"</h4>
+          <p>A village in Karnali now has clean water</p>
+        </div>
+        <div class="story">
+          <div class="story-number">03</div>
+          <h4>"The Night We Rebuilt"</h4>
+          <p>Earthquake relief in Gorkha</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="join">
-    <h2>Join the Crew</h2>
-    <p>Not all heroes wear capes. Some just click ‘Join.’</p>
-    <ul>
-      <li>Volunteer Opportunities</li>
-      <li>Fundraising Challenges</li>
-      <li>Campus Ambassador Program</li>
-    </ul>
-    <button class="btn">Join Us</button>
+  <section id="join" class="join-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Join the Crew</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="join-intro">Not all heroes wear capes. Some just click 'Join.'</p>
+      <div class="join-options">
+        <div class="join-card">
+          <div class="join-icon">🤝</div>
+          <h4>Volunteer Opportunities</h4>
+        </div>
+        <div class="join-card">
+          <div class="join-icon">💪</div>
+          <h4>Fundraising Challenges</h4>
+        </div>
+        <div class="join-card">
+          <div class="join-icon">🎓</div>
+          <h4>Campus Ambassador Program</h4>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-large">Join Us</button>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: hello@kindredflame.org</p>
-    <p>Location: Kathmandu, Nepal</p>
-    <p>Follow us: Instagram | Twitter | TikTok</p>
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <p>hello@kindredflame.org</p>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <p>Kathmandu, Nepal</p>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🌐</span>
+          <p>Instagram | Twitter | TikTok</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 Kindred Flame. All rights reserved.</p>
+    <div class="container">
+      <p>© 2025 Kindred Flame. All rights reserved.</p>
+      <p class="footer-tagline">Lighting the way to a better tomorrow ✨</p>
+    </div>
   </footer>
 </body>
 </html>

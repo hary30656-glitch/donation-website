@@ -41,7 +41,13 @@
       <h2 class="hero-title">One spark can light a thousand hearts.</h2>
       <p class="hero-subtitle">Be the flame.</p>
       <div class="hero-buttons">
-        <a href="/pages/patient-details.html" class="btn btn-primary">Donate Now</a>
+        <div class="fund-container">
+  <h2>Total fund collected</h2>
+  <div class="fund-amount">0</div>
+  
+</div>
+<button class="btn btn-primary" onclick="processDonation()">Donate Now</button>
+        
         <a href="#join" class="btn btn-secondary">Join the Crew</a>
       </div>
     </div>
@@ -122,7 +128,9 @@
         <input type="number" id="customAmount" placeholder="Enter custom amount (Rs.)" min="100">
       </div>
       <button class="btn btn-primary" onclick="processDonation()">Donate Now</button>
+      
     </div>
+    
   </section>
 
   <section id="impact" class="impact-section">
@@ -243,6 +251,41 @@
         }
       }
     });
+    function processDonation() {
+  const amount = parseInt(document.getElementById('customAmount').value);
+  const recurring = document.querySelector('input[name="recurring"]:checked').value;
+
+  if (!amount || amount < 100) {
+    alert("Please enter a valid amount (minimum Rs.100).");
+    return;
+  }
+
+  // Save donation
+  const donation = {
+    amount,
+    recurring,
+    date: new Date().toLocaleDateString()
+  };
+
+  const history = JSON.parse(localStorage.getItem('donations') || '[]');
+  history.push(donation);
+  localStorage.setItem('donations', JSON.stringify(history));
+
+  // Update total fund
+  const totalFund = history.reduce((sum, d) => sum + d.amount, 0);
+  document.querySelector('.fund-amount').innerText = totalFund;
+
+  // Show QR code
+  const qrText = `https://kindredflame.org/donate?amount=${amount}&recurring=${recurring}`;
+  QRCode.toCanvas(document.getElementById('qrCode'), qrText, { width: 200 }, err => {
+    if (err) console.error(err);
+  });
+
+  // Popup
+  alert(`🔥 Donation Received!\nRs.${amount} (${recurring})\nThank you for igniting hope.`);
+
+  updateDashboard();
+}
   </script>
 </body>
 </html>

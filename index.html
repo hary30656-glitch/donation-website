@@ -4,16 +4,599 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kindred Flame – Ignite Hope</title>
-  <link rel="stylesheet" href="/style/style.css" />
-  <link rel="stylesheet" href="/pages/script.js" />
   <style>
-    /* Graph styling */
-    .impact-graph {
-      margin-top: 30px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ff6b35;
+      --secondary: #f7931e;
+      --dark: #1a1a2e;
+      --darker: #0f0f1e;
+      --light: #ffffff;
+      --accent: #FFA500;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+      color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-bg-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.1), transparent 50%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .flame-icon {
+      font-size: 5rem;
+      animation: flicker 2s ease-in-out infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.05) rotate(-2deg); }
+      75% { transform: scale(0.95) rotate(2deg); }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .fund-container {
       background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 165, 0, 0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .fund-container h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .fund-amount {
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--light);
+      box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--light);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 0.8rem 2rem;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    .about-text {
+      text-align: center;
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+    }
+
+    .more-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      max-width: 800px;
+      margin: 2rem auto 0;
+      opacity: 0;
+    }
+
+    .more-content.show {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    /* Donation Tiers */
+    .donation-tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .tier {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .tier:hover, .tier.selected {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .tier.featured {
+      border-color: var(--primary);
+      background: rgba(255, 107, 53, 0.08);
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .tier-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tier-amount {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    .custom-amount {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .custom-amount input {
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--light);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .custom-amount input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .donation-options {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .donation-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .donation-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    /* Impact Graph */
+    .impact-graph {
+      margin: 3rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Impact Stories */
+    .impact-stories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .story {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .story:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(10px);
+    }
+
+    .story-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+      opacity: 0.6;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Join Section */
+    .join-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .join-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .join-card:hover {
+      border-color: var(--primary);
+      transform: scale(1.05);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .join-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .join-intro {
+      text-align: center;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Contact */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 600px;
+      margin: 3rem auto;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--darker);
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-tagline {
+      margin-top: 0.5rem;
+      opacity: 0.7;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--dark);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--light);
+      opacity: 0.7;
+    }
+
+    .modal-close:hover {
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .fund-amount {
+        font-size: 2rem;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .donate-intro {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -40,14 +623,12 @@
       <div class="flame-icon">🔥</div>
       <h2 class="hero-title">One spark can light a thousand hearts.</h2>
       <p class="hero-subtitle">Be the flame.</p>
+      <div class="fund-container">
+        <h2>Total Funds Collected</h2>
+        <div class="fund-amount">Rs. <span id="totalFund">0</span></div>
+      </div>
       <div class="hero-buttons">
-        <div class="fund-container">
-  <h2>Total fund collected</h2>
-  <div class="fund-amount">0</div>
-  
-</div>
-<button class="btn btn-primary" onclick="processDonation()">Donate Now</button>
-        
+        <button class="btn btn-primary" onclick="scrollToSection('donate')">Donate Now</button>
         <a href="#join" class="btn btn-secondary">Join the Crew</a>
       </div>
     </div>
@@ -61,7 +642,7 @@
         <div class="section-divider"></div>
       </div>
       <p class="about-text">We uplift communities through generosity and action, where kindness sparks hope in every soul.</p> 
-      <button class="btn btn-outline" onclick="showMoreAbout()">Learn More</button>
+      <center><button class="btn btn-outline" onclick="showMoreAbout()">Learn More</button></center>
       <div id="more-about" class="more-content">
         <p>Kindred Flame was founded in 2025 with a simple mission: to ignite hope in communities across Nepal. We believe that every act of kindness, no matter how small, has the power to create lasting change. Through our dedicated team of volunteers and generous donors, we've touched thousands of lives across education, health, and emergency relief.</p>
       </div>
@@ -110,27 +691,35 @@
         <div class="tier" onclick="selectTier(500)">
           <div class="tier-icon">✨</div>
           <h4>Spark of Hope</h4>
-          <p class="tier-amount">Rs.500</p>
+          <p class="tier-amount">Rs. 500</p>
         </div>
         <div class="tier featured" onclick="selectTier(1000)">
           <div class="tier-badge">Popular</div>
           <div class="tier-icon">🔆</div>
           <h4>Beacon of Change</h4>
-          <p class="tier-amount">Rs.1000</p>
+          <p class="tier-amount">Rs. 1,000</p>
         </div>
         <div class="tier" onclick="selectTier(5000)">
           <div class="tier-icon">🔥</div>
           <h4>Wildfire of Kindness</h4>
-          <p class="tier-amount">Rs.5000</p>
+          <p class="tier-amount">Rs. 5,000</p>
         </div>
       </div>
       <div class="custom-amount">
         <input type="number" id="customAmount" placeholder="Enter custom amount (Rs.)" min="100">
       </div>
-      <button class="btn btn-primary" onclick="processDonation()">Donate Now</button>
-      
+      <div class="donation-options">
+        <label class="donation-option">
+          <input type="radio" name="recurring" value="one-time" checked>
+          <span>One-time</span>
+        </label>
+        <label class="donation-option">
+          <input type="radio" name="recurring" value="monthly">
+          <span>Monthly</span>
+        </label>
+      </div>
+      <center><button class="btn btn-primary" onclick="processDonation()">Complete Donation</button></center>
     </div>
-    
   </section>
 
   <section id="impact" class="impact-section">
@@ -139,11 +728,10 @@
         <h2>Impact Stories</h2>
         <div class="section-divider"></div>
       </div>
-      <p class="impact-intro">See how your kindness transforms lives:</p>
+      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">See how your kindness transforms lives:</p>
 
-      <!-- Added Graph -->
       <div class="impact-graph">
-        <canvas id="impactChart" width="400" height="200"></canvas>
+        <canvas id="impactChart"></canvas>
       </div>
 
       <div class="impact-stories">
@@ -187,11 +775,9 @@
           <h4>Campus Ambassador Program</h4>
         </div>
       </div>
-      <div class="join-cta">
-        <div class="join-cta-text">
-          <a href="/pages/join-us.html"><button class="btn btn-primary" onclick="joinAsMember()">Join Us As Member</button></a>
-        </div>
-      </div>
+      <center style="margin-top: 2rem;">
+        <button class="btn btn-primary" onclick="joinAsMember()">Join Us As Member</button>
+      </center>
     </div>
   </section>
 
@@ -202,9 +788,22 @@
         <div class="section-divider"></div>
       </div>
       <div class="contact-info">
-        <div class="contact-item"><span class="contact-icon">📧</span><p><a href="mailto:hello@kindredflame.org">hello@kindredflame.org</a></p></div>
-        <div class="contact-item"><span class="contact-icon">📍</span><p>Kathmandu, Nepal</p></div>
-        <div class="contact-item"><span class="contact-icon">🌐</span><p><a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">TikTok</a></p></div>
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <p><a href="mailto:hello@kindredflame.org">hello@kindredflame.org</a></p>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <p>Kathmandu, Nepal</p>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🌐</span>
+          <p>
+            <a href="#">Instagram</a> | 
+            <a href="#">Twitter</a> | 
+            <a href="#">TikTok</a>
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -216,76 +815,208 @@
     </div>
   </footer>
 
-  <!-- Chart.js -->
+  <!-- Modal for stories and details -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <script>
-    // Impact chart
-    const impactCtx = document.getElementById('impactChart').getContext('2d');
-    new Chart(impactCtx, {
-      type: 'line',
-      data: {
-        labels: ['2021', '2022', '2023', '2024', '2025'],
-        datasets: [{
-          label: 'Families Helped',
-          data: [500, 1200, 2500, 3800, 5400],
-          backgroundColor: 'rgba(255, 165, 0, 0.3)',
-          borderColor: '#FFA500',
-          borderWidth: 2,
-          tension: 0.4,
-          fill: true,
-          pointBackgroundColor: '#fff',
-          pointBorderColor: '#FFA500',
-          pointRadius: 5
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { labels: { color: '#fff' } },
-          title: { display: true, text: 'Impact Growth Over the Years', color: '#fff', font: { size: 18 } }
-        },
-        scales: {
-          x: { ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.1)' } },
-          y: { beginAtZero: true, ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.1)' } }
-        }
-      }
-    });
+    let selectedAmount = 0;
+    let donations = [];
+
+    // Initialize on load
+    window.onload = function() {
+      loadDonations();
+      updateTotalFund();
+      initChart();
+    };
+
+    function loadDonations() {
+      const stored = localStorage.getItem('kindredFlameDonations');
+      donations = stored ? JSON.parse(stored) : [];
+    }
+
+    function saveDonations() {
+      localStorage.setItem('kindredFlameDonations', JSON.stringify(donations));
+    }
+
+    function updateTotalFund() {
+      const total = donations.reduce((sum, d) => sum + d.amount, 0);
+      document.getElementById('totalFund').textContent = total.toLocaleString();
+    }
+
+    function selectTier(amount) {
+      selectedAmount = amount;
+      document.getElementById('customAmount').value = amount;
+      
+      // Visual feedback
+      document.querySelectorAll('.tier').forEach(tier => {
+        tier.classList.remove('selected');
+      });
+      event.target.closest('.tier').classList.add('selected');
+    }
+
     function processDonation() {
-  const amount = parseInt(document.getElementById('customAmount').value);
-  const recurring = document.querySelector('input[name="recurring"]:checked').value;
+      const amountInput = document.getElementById('customAmount').value;
+      const amount = parseInt(amountInput) || selectedAmount;
+      const recurring = document.querySelector('input[name="recurring"]:checked').value;
 
-  if (!amount || amount < 100) {
-    alert("Please enter a valid amount (minimum Rs.100).");
-    return;
-  }
+      if (!amount || amount < 100) {
+        showModal('⚠️ Invalid Amount', 'Please enter a valid amount (minimum Rs. 100).');
+        return;
+      }
 
-  // Save donation
-  const donation = {
-    amount,
-    recurring,
-    date: new Date().toLocaleDateString()
-  };
+      // Save donation
+      const donation = {
+        amount,
+        recurring,
+        date: new Date().toISOString()
+      };
 
-  const history = JSON.parse(localStorage.getItem('donations') || '[]');
-  history.push(donation);
-  localStorage.setItem('donations', JSON.stringify(history));
+      donations.push(donation);
+      saveDonations();
+      updateTotalFund();
 
-  // Update total fund
-  const totalFund = history.reduce((sum, d) => sum + d.amount, 0);
-  document.querySelector('.fund-amount').innerText = totalFund;
+      // Show success
+      showModal(
+        '🔥 Donation Received!',
+        `<p style="font-size: 1.2rem; margin: 1rem 0;">Rs. ${amount.toLocaleString()}</p>
+        <p>Type: ${recurring}</p>
+        <p style="margin-top: 1rem;">Thank you for igniting hope! Your contribution will make a real difference in someone's life.</p>`
+      );
 
-  // Show QR code
-  const qrText = `https://kindredflame.org/donate?amount=${amount}&recurring=${recurring}`;
-  QRCode.toCanvas(document.getElementById('qrCode'), qrText, { width: 200 }, err => {
-    if (err) console.error(err);
-  });
+      // Reset form
+      document.getElementById('customAmount').value = '';
+      selectedAmount = 0;
+      document.querySelectorAll('.tier').forEach(tier => {
+        tier.classList.remove('selected');
+      });
+    }
 
-  // Popup
-  alert(`🔥 Donation Received!\nRs.${amount} (${recurring})\nThank you for igniting hope.`);
+    function showMoreAbout() {
+      const moreContent = document.getElementById('more-about');
+      moreContent.classList.toggle('show');
+      event.target.textContent = moreContent.classList.contains('show') ? 'Show Less' : 'Learn More';
+    }
 
-  updateDashboard();
-}
-  </script>
-</body>
-</html>
+    function showCauseDetails(cause) {
+      const causes = {
+        education: {
+          title: '📚 Child Education',
+          content: 'We provide scholarships, school supplies, and learning resources to underprivileged children across Nepal. Education is the foundation of breaking the cycle of poverty.'
+        },
+        water: {
+          title: '💧 Clean Water Access',
+          content: 'We build water filtration systems and wells in remote villages, ensuring communities have access to safe drinking water—a basic human right.'
+        },
+            food: {
+              title: '🍽️ Food Security',
+              content: 'Through community kitchens and sustainable farming programs, we ensure no family goes to bed hungry. We also provide nutrition education.'
+            },
+            emergency: {
+              title: '🚨 Emergency Relief',
+              content: 'When disaster strikes, we\'re there. We provide immediate relief, shelter, medical aid, and rehabilitation support to affected communities.'
+            }
+          };
+          showModal(causes[cause].title, causes[cause].content);
+        }
+    
+        function showStory(storyId) {
+          const stories = {
+            story1: {
+              title: '"From Dust to Dreams"',
+              content: 'Ramesh, a 12-year-old from Dang, was working in fields instead of going to school. Through our scholarship program, he now attends classes and dreams of becoming an engineer. His mother says, "You gave my son a future."'
+            },
+            story2: {
+              title: '"Water for Life"',
+              content: 'The village of Charikot had to walk 3 hours daily for water. We installed a filtration system, and now 500+ people have clean water at their doorstep. Healthcare visits dropped by 40%.'
+            },
+            story3: {
+              title: '"The Night We Rebuilt"',
+              content: 'After the 2015 earthquake, we provided shelter and aid to 2,000 families in Gorkha. Today, many have rebuilt their homes and livelihoods. One family said, "You didn\'t just help us survive; you helped us hope again."'
+            }
+          };
+          showModal(stories[storyId].title, stories[storyId].content);
+        }
+        
+            function joinProgram(program) {
+              const programs = {
+                volunteer: 'Fill out the volunteer form to join our on-ground teams.',
+                fundraising: 'Start a fundraising challenge and inspire your network to donate.',
+                ambassador: 'Join our campus ambassador program and lead initiatives at your institution.'
+              };
+              showModal('🎯 ' + program.charAt(0).toUpperCase() + program.slice(1), programs[program]);
+            }
+        
+            function joinAsMember() {
+              showModal('Welcome to the Crew! 🔥', 'We\'ll send you more details at hello@kindredflame.org. Check your inbox!');
+            }
+        
+            function showModal(title, content) {
+              document.getElementById('modalBody').innerHTML = `<h3>${title}</h3><p>${content}</p>`;
+              document.getElementById('modal').classList.add('show');
+            }
+        
+            function closeModal() {
+              document.getElementById('modal').classList.remove('show');
+            }
+        
+            function scrollToSection(sectionId) {
+              const section = document.getElementById(sectionId);
+              section.scrollIntoView({ behavior: 'smooth' });
+            }
+        
+            // Chart initialization
+            function initChart() {
+              const ctx = document.getElementById('impactChart').getContext('2d');
+              new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  datasets: [{
+                    label: 'Lives Impacted',
+                    data: [50, 120, 200, 350, 500, 750],
+                    borderColor: '#ff6b35',
+                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      labels: {
+                        color: '#ffffff'
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {
+                      ticks: {
+                        color: '#ffffff'
+                      },
+                      grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                      }
+                    },
+                    x: {
+                      ticks: {
+                        color: '#ffffff'
+                      },
+                      grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                      }
+                    }
+                  }
+                }
+              });
+            }
+          </script>
+        </body>
+        </html>
